@@ -16,7 +16,6 @@ func Init(config *config.EnvConfig) (*mongo.Collection, *mongo.Client) {
 		config.Username,
 		config.Password,
 	)
-	fmt.Println(MONGODB_URI)
 
 	clientOptions := options.Client().ApplyURI(MONGODB_URI)
 	client, err := mongo.Connect(context.Background(), clientOptions)
