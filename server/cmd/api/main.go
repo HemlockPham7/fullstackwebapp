@@ -9,6 +9,7 @@ import (
 	"github.com/HemlockPham7/server/handlers"
 	"github.com/HemlockPham7/server/repositories"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
@@ -17,6 +18,10 @@ func main() {
 	defer client.Disconnect(context.Background())
 
 	app := fiber.New()
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: envConfig.ClientPort,
+		AllowHeaders: envConfig.AllowHeader,
+	}))
 
 	// Repositories
 	todoRepository := repositories.NewTodoRepository(db)

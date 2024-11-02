@@ -12,6 +12,8 @@ type EnvConfig struct {
 	Password       string `env:"PASSWORD,required"`
 	DatabaseName   string `env:"DBNAME,required"`
 	CollectionName string `env:"CLNAME,required"`
+	ClientPort     string `env:"CLIENT,required"`
+	AllowHeader    string `env:"HEADER,required"`
 }
 
 func NewEnvConfig() *EnvConfig {
