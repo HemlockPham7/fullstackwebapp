@@ -8,8 +8,11 @@ require (
 	go.mongodb.org/mongo-driver v1.17.1
 )
 
+require github.com/stretchr/testify v1.9.0 // indirect
+
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
+	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/uuid v1.5.0 // indirect
 	github.com/klauspost/compress v1.17.0 // indirect
