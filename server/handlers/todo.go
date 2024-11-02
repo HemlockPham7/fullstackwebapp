@@ -18,18 +18,18 @@ func NewTodoHandler(router fiber.Router, repository models.TodoRepository) {
 		repository: repository,
 	}
 
-	router.Get("/api/todos", handler.getTodos)
-	router.Get("/api/todos/:id", handler.getTodo)
-	router.Post("/api/todos", handler.createTodo)
-	router.Patch("/api/todos/:id", handler.updateTodo)
-	router.Delete("/api/todos/:id", handler.deleteTodo)
+	router.Get("/", handler.GetTodos)
+	router.Get("/:id", handler.GetTodo)
+	router.Post("/", handler.CreateTodo)
+	router.Patch("/:id", handler.UpdateTodo)
+	router.Delete("/:id", handler.DeleteTodo)
 }
 
-func (h *TodoHandler) getTodos(ctx *fiber.Ctx) error {
+func (h *TodoHandler) GetTodos(ctx *fiber.Ctx) error {
 	c, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	todos, err := h.repository.getTodos(c)
+	todos, err := h.repository.GetTodos(c)
 	if err != nil {
 		return ctx.Status(fiber.StatusInternalServerError).JSON(&fiber.Map{
 			"status":  "fail",
@@ -45,7 +45,7 @@ func (h *TodoHandler) getTodos(ctx *fiber.Ctx) error {
 	})
 }
 
-func (h *TodoHandler) getTodo(ctx *fiber.Ctx) error {
+func (h *TodoHandler) GetTodo(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 	objectID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
@@ -59,7 +59,7 @@ func (h *TodoHandler) getTodo(ctx *fiber.Ctx) error {
 	c, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	todo, err := h.repository.getTodo(c, objectID)
+	todo, err := h.repository.GetTodo(c, objectID)
 	if err != nil {
 		return ctx.Status(fiber.StatusNotFound).JSON(&fiber.Map{
 			"status":  "fail",
@@ -75,7 +75,7 @@ func (h *TodoHandler) getTodo(ctx *fiber.Ctx) error {
 	})
 }
 
-func (h *TodoHandler) createTodo(ctx *fiber.Ctx) error {
+func (h *TodoHandler) CreateTodo(ctx *fiber.Ctx) error {
 	todo := new(models.Todo)
 	if err := ctx.BodyParser(todo); err != nil {
 		return ctx.Status(fiber.StatusBadRequest).JSON(&fiber.Map{
@@ -88,7 +88,7 @@ func (h *TodoHandler) createTodo(ctx *fiber.Ctx) error {
 	c, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	createdTodo, err := h.repository.createTodo(c, todo)
+	createdTodo, err := h.repository.CreateTodo(c, todo)
 	if err != nil {
 		return ctx.Status(fiber.StatusInternalServerError).JSON(&fiber.Map{
 			"status":  "fail",
@@ -104,7 +104,7 @@ func (h *TodoHandler) createTodo(ctx *fiber.Ctx) error {
 	})
 }
 
-func (h *TodoHandler) updateTodo(ctx *fiber.Ctx) error {
+func (h *TodoHandler) UpdateTodo(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 	objectID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
@@ -118,7 +118,7 @@ func (h *TodoHandler) updateTodo(ctx *fiber.Ctx) error {
 	c, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	updatedTodo, err := h.repository.updateTodo(c, objectID)
+	updatedTodo, err := h.repository.UpdateTodo(c, objectID)
 	if err != nil {
 		return ctx.Status(fiber.StatusInternalServerError).JSON(&fiber.Map{
 			"status":  "fail",
@@ -134,7 +134,7 @@ func (h *TodoHandler) updateTodo(ctx *fiber.Ctx) error {
 	})
 }
 
-func (h *TodoHandler) deleteTodo(ctx *fiber.Ctx) error {
+func (h *TodoHandler) DeleteTodo(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 	objectID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
@@ -148,7 +148,7 @@ func (h *TodoHandler) deleteTodo(ctx *fiber.Ctx) error {
 	c, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	err = h.repository.deleteTodo(c, objectID)
+	err = h.repository.DeleteTodo(c, objectID)
 	if err != nil {
 		return ctx.Status(fiber.StatusInternalServerError).JSON(&fiber.Map{
 			"status":  "fail",

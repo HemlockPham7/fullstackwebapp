@@ -13,9 +13,9 @@ type Todo struct {
 }
 
 type TodoRepository interface {
-	getTodos(ctx context.Context) ([]*Todo, error)
-	getTodo(ctx context.Context, objectID primitive.ObjectID) (*Todo, error)
-	createTodo(ctx context.Context, todo *Todo) (*Todo, error)
-	updateTodo(ctx context.Context, objectID primitive.ObjectID) (*Todo, error)
-	deleteTodo(ctx context.Context, objectID primitive.ObjectID) error
+	GetTodos(ctx context.Context) ([]*Todo, error)
+	GetTodo(ctx context.Context, objectID primitive.ObjectID) (*Todo, error)
+	CreateTodo(ctx context.Context, todo *Todo) (*Todo, error)
+	UpdateTodo(ctx context.Context, objectID primitive.ObjectID) (*Todo, error)
+	DeleteTodo(ctx context.Context, objectID primitive.ObjectID) error
 }
