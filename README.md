@@ -1,4 +1,4 @@
-# ChatApp
+# TodoList Fullstack Webapp
 - Developed Restful CRUD API and authentication functionalities for a Todo List website.
 - MongoDB is used to store todo’s information, with the server-side is handled by Golang, GoFiber version 2.
 - Developed a front-end interface using TypeScript, React.js and TailwindCSS.
