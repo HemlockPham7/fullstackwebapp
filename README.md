@@ -4,8 +4,7 @@
 - Developed a front-end interface using TypeScript, React.js and TailwindCSS.
 
 ## 👓 Demo
-https://github.com/user-attachments/assets/8d90aa1d-aaff-4891-8ab6-bca9f43dc658
-
+https://youtu.be/faQvZEQtbjU
 
 ## ⭐ Features
 - Create a new note
